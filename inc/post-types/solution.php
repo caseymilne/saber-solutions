@@ -19,6 +19,7 @@ function create_solution_post_type() {
       'labels'             => $labels,
       'public'             => true,
       'has_archive'        => true,
+			'rewrite'            => array( 'slug' => 'solutions' ),
       'capability_type'    => 'post',
       'hierarchical'       => false,
 			'show_in_rest'       => true,

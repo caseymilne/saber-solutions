@@ -17,14 +17,22 @@ class Plugin {
 		require_once( SABER_SOLUTIONS_PATH . '/inc/post-types/solution.php' );
 		require_once( SABER_SOLUTIONS_PATH . '/inc/taxonomies/solution-category.php' );
 
-		add_filter( 'template_include', [$this, 'singleTemplate'] );
+		add_filter( 'template_include', [$this, 'templates'] );
 
 	}
 
-	function singleTemplate( $template ) {
-    if ( get_post_type() == 'solution' ) {
-        $template = SABER_SOLUTIONS_PATH . '/templates/single-solution.php';
+	function templates( $template ) {
+
+		// Provide single template.
+    if ( is_single() && get_post_type() == 'solution' ) {
+    	$template = SABER_SOLUTIONS_PATH . '/templates/single-solution.php';
     }
+
+		// Provide archive template.
+    if ( is_archive() && is_post_type_archive( 'solution' ) ) {
+    	$template = SABER_SOLUTIONS_PATH . '/templates/archive-solution.php';
+    }
+
     return $template;
 	}
 
